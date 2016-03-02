@@ -89,10 +89,12 @@
       // lisa uus purk
       var title = document.querySelector('.title').value;
       var ingredients = document.querySelector('.ingredients').value;
-      console.log(title + ' ' + ingredients);
+      var date = document.querySelector('.date').value;
+      var color = document.querySelector('.color').value;
+      console.log(title + ' ' + ingredients + ' ' + color);
       if(title && ingredients){
         document.querySelector('#error-message').innerHTML = 'Moosipurk lisatud!';
-        var new_jar = new Jar(title, ingredients);
+        var new_jar = new Jar(title, ingredients, date);
         var li = new_jar.createHtmlElement();
         document.querySelector('.list-of-jars').appendChild(li);
       }else{
@@ -146,9 +148,11 @@
   };
 
 
-  var Jar = function(new_title, new_ingredients){
+  var Jar = function(new_title, new_ingredients, new_date, new_color){
     this.title = new_title;
     this.ingredients = new_ingredients;
+    this.date = new_date;
+    this.color = new_color;
   };
 
   Jar.prototype = {
@@ -169,13 +173,16 @@
       var letter = document.createTextNode(this.title.charAt(0));
       span.appendChild(letter);
 
+
       li.appendChild(span);
 
       var content_span = document.createElement('span');
       content_span.className = 'content';
 
-      var content = document.createTextNode(this.title + ' | ' + this.ingredients);
+      var content = document.createTextNode(this.title + ' | ' + this.ingredients + ' | ' + this.date);
+      var lettercolor = document.createTextNode(this.color);
       content_span.appendChild(content);
+      span.style.color = lettercolor;
 
       li.appendChild(content_span);
 
